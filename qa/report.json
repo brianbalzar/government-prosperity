@@ -1,0 +1,97 @@
+[
+  {
+    "width": 1280,
+    "countries": 149,
+    "facets": 149,
+    "mandatoryLabels": [
+      "United States",
+      "South Korea",
+      "France",
+      "Sweden",
+      "Ukraine",
+      "Kiribati",
+      "Marshall Islands",
+      "Haiti",
+      "Ireland",
+      "Luxembourg"
+    ],
+    "labelOverlaps": [],
+    "overflow": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "checks": "Country selection, search, continent filtering, refit, empty state, reset, scatter tap and dismiss, offline load"
+  },
+  {
+    "width": 768,
+    "countries": 149,
+    "facets": 149,
+    "mandatoryLabels": [
+      "United States",
+      "South Korea",
+      "France",
+      "Sweden",
+      "Ukraine",
+      "Kiribati",
+      "Marshall Islands",
+      "Haiti",
+      "Ireland",
+      "Luxembourg"
+    ],
+    "labelOverlaps": [],
+    "overflow": {
+      "scroll": 768,
+      "width": 768
+    },
+    "checks": "Country selection, search, continent filtering, refit, empty state, reset, scatter tap and dismiss, offline load"
+  },
+  {
+    "width": 390,
+    "countries": 149,
+    "facets": 149,
+    "mandatoryLabels": [
+      "United States",
+      "South Korea",
+      "France",
+      "Sweden",
+      "Ukraine",
+      "Kiribati",
+      "Marshall Islands",
+      "Haiti",
+      "Ireland",
+      "Luxembourg"
+    ],
+    "labelOverlaps": [],
+    "overflow": {
+      "scroll": 390,
+      "width": 390
+    },
+    "checks": "Country selection, search, continent filtering, refit, empty state, reset, scatter tap and dismiss, offline load"
+  },
+  {
+    "width": 320,
+    "countries": 149,
+    "facets": 149,
+    "mandatoryLabels": [
+      "United States",
+      "South Korea",
+      "France",
+      "Sweden",
+      "Ukraine",
+      "Kiribati",
+      "Marshall Islands",
+      "Haiti",
+      "Ireland",
+      "Luxembourg"
+    ],
+    "labelOverlaps": [],
+    "overflow": {
+      "scroll": 320,
+      "width": 320
+    },
+    "checks": "Country selection, search, continent filtering, refit, empty state, reset, scatter tap and dismiss, offline load"
+  },
+  {
+    "touch": "Scatter tap tooltip passed"
+  }
+]

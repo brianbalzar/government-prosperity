@@ -1,0 +1,7 @@
+*.zip
+node_modules/
+previous/
+reference/
+qa/*.png
+.DS_Store
+Thumbs.db

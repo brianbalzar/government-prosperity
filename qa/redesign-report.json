@@ -1,0 +1,140 @@
+[
+  {
+    "width": 1440,
+    "overflow": {
+      "page": 1440,
+      "width": 1440
+    },
+    "labels": [
+      "United States",
+      "South Korea",
+      "France",
+      "Sweden",
+      "Ukraine",
+      "China",
+      "India",
+      "Japan",
+      "Kiribati",
+      "Marshall Islands",
+      "Haiti",
+      "Ireland",
+      "Luxembourg"
+    ],
+    "collisions": [],
+    "matched": 149,
+    "heatmapCells": 3725,
+    "qaCountries": 18,
+    "checks": "Offline render; full sample statistics; OECD/EU/G20/quartile filters; grey context; refit; empty/reset; country search and selection; sort; 2020 heatmap inspection; alternate shared-scale facets; scatter tooltip"
+  },
+  {
+    "width": 1280,
+    "overflow": {
+      "page": 1280,
+      "width": 1280
+    },
+    "labels": [
+      "United States",
+      "South Korea",
+      "France",
+      "Sweden",
+      "Ukraine",
+      "China",
+      "India",
+      "Japan",
+      "Kiribati",
+      "Marshall Islands",
+      "Haiti",
+      "Ireland",
+      "Luxembourg"
+    ],
+    "collisions": [],
+    "matched": 149,
+    "heatmapCells": 3725,
+    "qaCountries": 18,
+    "checks": "Offline render; full sample statistics; OECD/EU/G20/quartile filters; grey context; refit; empty/reset; country search and selection; sort; 2020 heatmap inspection; alternate shared-scale facets; scatter tooltip"
+  },
+  {
+    "width": 768,
+    "overflow": {
+      "page": 768,
+      "width": 768
+    },
+    "labels": [
+      "United States",
+      "South Korea",
+      "France",
+      "Sweden",
+      "Ukraine",
+      "China",
+      "India",
+      "Japan",
+      "Kiribati",
+      "Marshall Islands",
+      "Haiti",
+      "Ireland",
+      "Luxembourg"
+    ],
+    "collisions": [],
+    "matched": 149,
+    "heatmapCells": 3725,
+    "qaCountries": 18,
+    "checks": "Offline render; full sample statistics; OECD/EU/G20/quartile filters; grey context; refit; empty/reset; country search and selection; sort; 2020 heatmap inspection; alternate shared-scale facets; scatter tooltip"
+  },
+  {
+    "width": 390,
+    "overflow": {
+      "page": 390,
+      "width": 390
+    },
+    "labels": [
+      "United States",
+      "South Korea",
+      "France",
+      "Sweden",
+      "Ukraine",
+      "China",
+      "India",
+      "Japan",
+      "Kiribati",
+      "Marshall Islands",
+      "Haiti",
+      "Ireland",
+      "Luxembourg"
+    ],
+    "collisions": [],
+    "matched": 149,
+    "heatmapCells": 3725,
+    "qaCountries": 18,
+    "checks": "Offline render; full sample statistics; OECD/EU/G20/quartile filters; grey context; refit; empty/reset; country search and selection; sort; 2020 heatmap inspection; alternate shared-scale facets; scatter tooltip"
+  },
+  {
+    "width": 320,
+    "overflow": {
+      "page": 320,
+      "width": 320
+    },
+    "labels": [
+      "United States",
+      "South Korea",
+      "France",
+      "Sweden",
+      "Ukraine",
+      "China",
+      "India",
+      "Japan",
+      "Kiribati",
+      "Marshall Islands",
+      "Haiti",
+      "Ireland",
+      "Luxembourg"
+    ],
+    "collisions": [],
+    "matched": 149,
+    "heatmapCells": 3725,
+    "qaCountries": 18,
+    "checks": "Offline render; full sample statistics; OECD/EU/G20/quartile filters; grey context; refit; empty/reset; country search and selection; sort; 2020 heatmap inspection; alternate shared-scale facets; scatter tooltip"
+  },
+  {
+    "touch": "Tap tooltip and country pin pass"
+  }
+]

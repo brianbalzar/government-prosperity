@@ -1,0 +1,28 @@
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+const {csv} = require('./inspect.cjs');
+const root=__dirname;
+const s=csv('spending.csv'), g=csv('income.csv'), regions=csv('continents.csv');
+const region=new Map(regions.map(r=>[r.Code,r['World region according to OWID']]));
+const incomes=new Map(g.filter(r=>r.Year==='2024'&&Number(r['GDP per capita'])>0).map(r=>[r.Code,r]));
+const countries=s.filter(r=>r.Year==='2024'&&/^[A-Z]{3}$/.test(r.Code)&&incomes.has(r.Code)&&r['Government expenditure (% of GDP)']!=='').map(r=>({code:r.Code,name:r.Entity,continent:region.get(r.Code),gdp:Number(incomes.get(r.Code)['GDP per capita']),spending:Number(r['Government expenditure (% of GDP)']),annotation:r['Government expenditure (% of GDP) (Annotations)'],history:s.filter(h=>h.Code===r.Code&&+h.Year>=2000&&+h.Year<=2024&&h['Government expenditure (% of GDP)']!=='').map(h=>[+h.Year,+h['Government expenditure (% of GDP)']]).sort((a,b)=>a[0]-b[0])})).sort((a,b)=>a.name.localeCompare(b.name));
+const qa=['Argentina','Australia','Brazil','Canada','China','Denmark','Finland','France','Germany','India','Italy','Japan','Mexico','South Africa','South Korea','Sweden','United Kingdom','United States'];
+for(const name of qa)if(!countries.some(c=>c.name===name))throw Error('Missing QA country: '+name);
+for(const c of countries){if(!c.continent||!Number.isFinite(c.spending)||!Number.isFinite(c.gdp))throw Error('Invalid '+c.name);if(new Set(c.history.map(h=>h[0])).size!==c.history.length)throw Error('Duplicate year');if(c.history.at(-1)[0]!==2024||c.history.at(-1)[1]!==c.spending)throw Error('Endpoint mismatch');}
+const lo=Math.min(...countries.flatMap(c=>c.history.map(h=>h[1]))),hi=Math.max(...countries.flatMap(c=>c.history.map(h=>h[1])));
+const domain=lo>=10&&hi<=65?[10,65]:[Math.floor(Math.min(0,lo)/10)*10,Math.ceil(hi/10)*10];
+const xs=countries.map(c=>Math.log(c.gdp)),ys=countries.map(c=>c.spending),mx=xs.reduce((a,b)=>a+b)/xs.length,my=ys.reduce((a,b)=>a+b)/ys.length;
+const slope=xs.reduce((s,x,i)=>s+(x-mx)*(ys[i]-my),0)/xs.reduce((s,x)=>s+(x-mx)**2,0),intercept=my-slope*mx;
+const r2=1-ys.reduce((s,y,i)=>s+(y-intercept-slope*xs[i])**2,0)/ys.reduce((s,y)=>s+(y-my)**2,0);
+const data={year:2024,downloaded:'2026-10-26',domain,countries,excluded:s.filter(r=>r.Year==='2024'&&!countries.some(c=>c.code===r.Code)).map(r=>r.Entity),qa};
+fs.mkdirSync(path.join(root,'data/processed'),{recursive:true});
+fs.writeFileSync(path.join(root,'data/processed/matched.json'),JSON.stringify(data,null,2));
+fs.writeFileSync(path.join(root,'data/processed/matched-2024.csv'),'Country,ISO3,Continent,Year,GDP per capita PPP constant 2021 international dollars,Government expenditure percent GDP\n'+countries.map(c=>[c.name,c.code,c.continent,2024,c.gdp,c.spending].join(',')).join('\n')+'\n');
+fs.writeFileSync(path.join(root,'data/processed/trends-2000-2024.csv'),'Country,ISO3,Year,Government expenditure percent GDP\n'+countries.flatMap(c=>c.history.map(h=>[c.name,c.code,...h].join(','))).join('\n')+'\n');
+const manifest={downloaded:data.downloaded,files:fs.readdirSync(path.join(root,'data/raw')).map(file=>({file,sha256:crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'data/raw',file))).digest('hex')})),matched:countries.length,excluded:data.excluded,historyRange:[lo,hi],sharedScale:domain,ols:{n:countries.length,intercept,slope,r2,ppPerDoubling:slope*Math.log(2)},qa:qa.map(name=>({name,passed:true,...countries.find(c=>c.name===name)}))};
+fs.writeFileSync(path.join(root,'data/audit.json'),JSON.stringify(manifest,null,2));
+const read=file=>fs.readFileSync(path.join(root,file),'utf8');
+const html=read('template.html').replace('/*__FONTS__*/',()=>read('fonts.css')).replace('/*__STYLES__*/',()=>read('styles.css')).replace('<!--__METHOD__-->',()=>read('method-fragment.html')).replace('/*__APP__*/',()=>read('app.js')+'\n'+read('controls.js')).replace('/*__DATA__*/',()=>JSON.stringify(data).replace(/</g,'\\u003c'));
+fs.writeFileSync(path.join(root,'index.html'),html);
+console.log(JSON.stringify({matched:countries.length,observations:countries.reduce((n,c)=>n+c.history.length,0),excluded:data.excluded,range:[lo,hi],domain,ols:manifest.ols,bytes:Buffer.byteLength(html)},null,2));
